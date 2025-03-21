@@ -30,7 +30,6 @@ Thumbs.db
 # Build Files
 dist/
 build/
-public/
 
 # React & Frontend
 frontend/node_modules/

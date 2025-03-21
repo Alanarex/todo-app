@@ -59,16 +59,6 @@ const TaskModal = ({ show, onHide, id = null, tasks, setTasks }) => {
         setError("");
         if (!formData.title.trim()) {
             setError("Title is required.");
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Title is required.',
-                timer: 4000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-                toast: true,
-                position: 'top-end',
-            });
             return;
         }
 
