@@ -22,7 +22,7 @@ const ensureDatabaseExists = async () => {
   try {
     const connection = await db.promise().getConnection();
     await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`);
-    console.log(`✅ Database '${process.env.DB_NAME}' ensured.`);
+    console.log(`Database '${process.env.DB_NAME}' ensured.`);
     connection.release();
   } catch (err) {
     Swal.fire({
@@ -35,7 +35,7 @@ const ensureDatabaseExists = async () => {
       position: 'top-end',
       showConfirmButton: false,
     });
-    console.error("❌ Error ensuring database exists:", err);
+    console.error("Error ensuring database exists:", err);
   }
 };
 
@@ -64,7 +64,7 @@ const ensureTableExists = async () => {
   try {
     const connection = await dbWithDatabase.promise().getConnection();
     await connection.query(createTableSQL);
-    console.log("✅ Table `tasks` checked/created successfully.");
+    console.log("Table `tasks` checked/created successfully.");
     connection.release();
   } catch (err) {
     Swal.fire({
@@ -77,14 +77,14 @@ const ensureTableExists = async () => {
       position: 'top-end',
       showConfirmButton: false,
     });
-    console.error("❌ Error ensuring table exists:", err);
+    console.error("Error ensuring table exists:", err);
   }
 };
 
 ensureDatabaseExists().then(() => {
   ensureTableExists().then(() => {
     app.listen(5000, () => {
-      console.log("✅ Backend running on port 5000");
+      console.log("Backend running on port 5000");
     });
   });
 });
