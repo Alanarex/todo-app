@@ -20,10 +20,6 @@ docker-compose.yml.bak
 .docker/
 .dockerignore
 
-# MySQL Database Files
-database/db_data/
-*.sql
-
 # Editor & System Files
 .vscode/
 .idea/
