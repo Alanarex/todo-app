@@ -1,0 +1,80 @@
+/* Navbar */
+.navbar {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black !important;
+}
+
+.add-task-btn {
+    background: none;
+    border: none;
+    color: black !important;
+    font-size: 2rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+.add-task-btn:hover {
+    opacity: 0.7;
+}
+
+/* Task Card */
+.task-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.task-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.task-meta {
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.task-due-warning {
+    color: darkred;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px red, 0px 0px 10px red;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    from {
+        text-shadow: 0px 0px 5px red;
+    }
+
+    to {
+        text-shadow: 0px 0px 15px red;
+    }
+}
+
+/* Status Toggle */
+.status-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
