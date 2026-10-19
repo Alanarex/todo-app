@@ -1,123 +1,65 @@
-# ✅ Application Todo (React + Express + MySQL + Docker)
+# Todo App
 
-Une application simple de gestion de tâches permettant d’ajouter, modifier, marquer comme terminée ou supprimer des tâches.  
-Elle est développée avec :
-- **Frontend** : React.js
-- **Backend** : Express.js (Node.js)
-- **Base de données** : MySQL
-- **Conteneurisation** : Docker & Docker Compose
+> A containerised task manager: React front end, Express REST API and MySQL, started with a single `docker compose up`.
 
----
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## 📂 Structure du projet
+**Résumé (FR)** : application de gestion de tâches full-stack conteneurisée (React, Express, MySQL, Docker Compose). On peut créer, modifier, supprimer et marquer des tâches comme terminées, avec description et échéance. Projet réalisé dans le cadre d'une évaluation de développement full-stack conteneurisé.
+
+## Features
+
+- Create, edit, delete tasks (title, description, due date/time).
+- Toggle a task as done / not done.
+- Bootstrap modal for add/edit, SweetAlert2 confirmations and error toasts in the UI.
+- REST API under `/tasks` (`GET`, `GET /:id`, `POST`, `PUT /:id`, `PATCH /:id/toggle`, `DELETE /:id`); the `tasks` table is created at startup.
+
+## Architecture
 
 ```
-todo-app/
-├── backend/             # API Express + logique de base de données
-│   ├── server.js        # Point d’entrée de l’API
-│   └── .env            # Variables d’environnement (base de données, API URL)
-├── frontend/            # Application React
-│   ├── src/             # Code source React
-│   ├── .env            # Variables d’environnement (base de données, API URL)
-│   └── Dockerfile       # Dockerfile pour le frontend
-└── docker-compose.yml   # Orchestration Docker
+frontend/   React (Create React App) + React Bootstrap, calls the API with axios
+backend/    Express + mysql2 connection pool (server.js)
+docker-compose.yml   db (MySQL) + backend (:5000) + frontend (:3000)
 ```
 
----
+The backend reads `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` and `CORS_ORIGIN`; the frontend reads `REACT_APP_BACKEND_URL`.
 
-## 🚀 Fonctionnalités
+## Getting started (Docker)
 
-- ✅ Ajouter une tâche
-- ✅ Modifier une tâche existante
-- ✅ Supprimer une tâche
-- ✅ Marquer une tâche comme terminée
-- ✅ Visualiser les tâches dans une interface claire
-- ✅ Affichage d’un message si une tâche est en retard
-- ✅ Modal Bootstrap pour ajouter/éditer
-- ✅ SweetAlert2 pour les messages de confirmation et erreurs
-
----
-
-## ⚙️ Pré-requis
-
-- [Node.js](https://nodejs.org)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-
----
-
-## 📦 Installation
-
-### 1. Cloner le dépôt
-```bash
+```sh
 git clone https://github.com/Alanarex/todo-app.git
 cd todo-app
-```
-
-### 2. Vérifier les fichiers `.env`
-
-#### `.env`
-```env
-DB_HOST=db
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=tododb
-REACT_APP_BACKEND_URL=http://localhost:5000
-```
-
----
-
-## 🐳 Démarrage avec Docker
-
-### 1. Lancer les services
-```bash
+cp .env.example .env        # set MYSQL_ROOT_PASSWORD
 docker compose up -d --build
 ```
 
-### 2. Accéder à l'application
-- Frontend (React) : http://localhost:3000
-- Backend (API Express) : http://localhost:5000/tasks
+- Frontend: http://localhost:3000
+- API: http://localhost:5000/tasks
 
----
+MySQL is published on `127.0.0.1:3306` only.
 
-## 🛠 Recommandations (en cas de problèmes)
+## Local development (without Docker)
 
-### React ne s'affiche pas ?
-- Vérifie que tu accèdes à `http://localhost:3000` (et pas un IP Docker)
-- Assure-toi que `package.json` contient :
-```json
-"start": "react-scripts start --host 0.0.0.0"
+```sh
+cd backend  && cp .env.example .env && npm install && node server.js
+cd frontend && cp .env.example .env && npm install && npm start
 ```
 
-### Base de données non reconnue ?
-- Vérifie que `MYSQL_DATABASE=tododb` est bien défini dans `docker-compose.yml`
-- Regénère les volumes :
-```bash
-docker compose down
-docker compose up -d --build
-```
+A MySQL server must be reachable with the credentials from `backend/.env`.
 
----
+## Tests
 
-## 🔧 Développement local (hors Docker)
+No automated tests yet (see the open issues).
 
-### Backend
-```bash
-cd backend
-npm install
-node server.js
-```
+## What it demonstrates
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm start
-```
+- A three-tier app orchestrated with Docker Compose, with a database health check.
+- A REST API with parameterised SQL queries and input validation.
+- A React UI with modals, confirmations and Bootstrap components.
 
----
+## License
 
-## 👨‍💻 Auteur
-
-Projet réalisé dans le cadre d’une évaluation de développement full-stack conteneurisé.  
-Par **Alaa Khalil**
+MIT, see [LICENSE](LICENSE).
